@@ -1,3 +1,4 @@
+from calculator.sum_calculator.exceptions import NegativeNumberException
 from calculator.sum_calculator.utils import Calculator
 from django.test import TestCase
 
@@ -18,3 +19,13 @@ class StringCalculatorTests(TestCase):
     def test_ignore_numbers_greater_than_1000(self):
         calculator = Calculator("2,1001,3")
         self.assertEqual(calculator.add(), 5)
+    
+    def test_handle_newline_as_delimiter(self):
+        calculator = Calculator("1,2\n3")
+        self.assertEqual(calculator.add(), 6)
+
+    def test_handle_negative_numbers(self):
+        calculator = Calculator("-1,2,-3")
+        with self.assertRaises(NegativeNumberException) as exc:
+            calculator.add()
+        self.assertEqual(str(exc.exception), "negatives not allowed: -1, -3")
