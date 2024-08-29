@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and test frontend
+        run: |
+          # Build the frontend Docker image
+          docker build -t frontend -f frontend/Dockerfile ./frontend
+          
+          # Run the frontend container
+          docker run --name frontend-test -d -p 8080:8080 frontend
+
+          # Wait for the frontend service to start
+          sleep 10
+
+          # Run frontend tests
+          docker exec frontend-test yarn test
+
+          # Clean up
+          docker stop frontend-test
+          docker rm frontend-test
+
+      - name: Build and test backend
+        run: |
+          # Build the backend Docker image
+          docker build -t backend -f backend/Dockerfile ./backend
+
+          # Run the backend container
+          docker run --name backend-test -d backend
+
+          # Wait for the backend service to start
+          sleep 10
+
+          # Run backend tests
+          docker exec backend-test python manage.py test
+
+          # Clean up
+          docker stop backend-test
+          docker rm backend-test
