@@ -28,7 +28,7 @@ class StringCalculatorTests(TestCase):
         calculator = Calculator("-1,2,-3")
         with self.assertRaises(NegativeNumberException) as exc:
             calculator.add()
-        self.assertEqual(str(exc.exception), "negatives not allowed: -1, -3") 
+        self.assertEqual(str(exc.exception), "Negatives not allowed: -1, -3") 
         
     def test_handle_custom_delimiter(self):
         calculator = Calculator("//;\n1;2;3")

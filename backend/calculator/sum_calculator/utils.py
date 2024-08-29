@@ -7,6 +7,7 @@ class Calculator:
         self.delimiters = [',', '\n']
 
     def add(self):
+        # Handle custom delimiter if string starts with //
         if self.numbers.startswith("//"):
             self._parse_custom_delimiters()
                             
@@ -37,6 +38,7 @@ class Calculator:
     
     
     def _validate_numbers(self, numbers):
+        # Raise an exception if the input contains a negative number
         negatives = [n for n in numbers if n < 0]
         if negatives:
-            raise NegativeNumberException(f"negatives not allowed: {', '.join(map(str, negatives))}")
+            raise NegativeNumberException(f"Negatives not allowed: {', '.join(map(str, negatives))}")
