@@ -33,3 +33,11 @@ class StringCalculatorTests(TestCase):
     def test_handle_custom_delimiter(self):
         calculator = Calculator("//;\n1;2;3")
         self.assertEqual(calculator.add(), 6)
+    
+    def test_handle_multiple_custom_delimiters(self):
+        calculator = Calculator("//[*][%]\n1*2%3")
+        self.assertEqual(calculator.add(), 6)
+
+    def test_handle_long_delimiters(self):
+        calculator = Calculator("//[***][%%%]\n1***2%%%3")
+        self.assertEqual(calculator.add(), 6)
