@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import calculatorApi from '../apis/calculator';
 
+const DATA_NUMBERS_KEY = "numbers";
+
 const useCalculator = () => {
     const [state, setState] = useState<{
         numbers: any;
@@ -34,7 +36,7 @@ const useCalculator = () => {
             setState((prevState) => ({
                 ...prevState,
                 result: null,
-                error: (error as any).response?.data["numbers"] || 'An error occurred',
+                error: (error as any).response?.data[DATA_NUMBERS_KEY] || 'An error occurred',
                 isLoading: false,
             }));
         }
