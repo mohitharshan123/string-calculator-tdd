@@ -32,3 +32,8 @@ Follow these steps to get your project running with Docker.
    ------------------------
    Once the container is running, you can access your application at:
    http://localhost:8080 (or the port you configured)
+
+6. Continuous Integration & Continuous Deployment (CI/CD)
+   -------------------------------------------------------
+   The project is integrated with CI/CD pipelines to ensure automated testing and deployment. Every push to the repository triggers a series of automated tests to maintain 
+   code quality.
