@@ -6,12 +6,29 @@ class Calculator:
         self.numbers = numbers
         self.delimiters = [',', '\n']
 
-    def add(self):                
+    def add(self):
+        if self.numbers.startswith("//"):
+            self._parse_custom_delimiters()
+                            
         numbers_array = self._get_numbers_array()
         self._validate_numbers(numbers_array)
         
         return sum(n for n in numbers_array if n <= 1000)
     
+    def _parse_custom_delimiters(self):
+        delimiter_end_index = self.numbers.index("\n")
+        delimiter_part = self.numbers[2:delimiter_end_index]
+
+        if delimiter_part.startswith("[") and delimiter_part.endswith("]"):
+            self.delimiters = re.findall(r'\[(.*?)\]', delimiter_part)
+        else:
+            self.delimiters = [delimiter_part]
+
+        self.numbers = self.numbers[delimiter_end_index + 1:]
+
+        for delimiter in self.delimiters:
+            self.numbers = self.numbers.replace(delimiter, ",")
+
     def _get_numbers_array(self):
         numbers_string = re.sub(r'[\r\n]+', ',', self.numbers)
         numbers_array = numbers_string.split(",")
