@@ -35,5 +35,5 @@ Follow these steps to get your project running with Docker.
 
 6. Continuous Integration & Continuous Deployment (CI/CD)
    -------------------------------------------------------
-   The project is integrated with CI/CD pipelines to ensure automated testing and deployment. Every push to the repository triggers a series of automated tests to maintain 
+   The project is integrated with CI/CD pipelines to ensure automated testing. Every push to the repository triggers a series of automated tests to maintain 
    code quality.
