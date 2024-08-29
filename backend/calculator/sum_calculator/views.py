@@ -1,8 +1,11 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+from .exceptions import NegativeNumberException
 from .serializers import AddSerializer
-from.utils import Calculator
+from .utils import Calculator
+
 
 @api_view(['POST'])
 def calculate(request):
@@ -13,7 +16,7 @@ def calculate(request):
         try:
             result = calculator.add()
             return Response({'result': result})
-        except Exception as e:
+        except NegativeNumberException as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
