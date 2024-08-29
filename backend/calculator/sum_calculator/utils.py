@@ -21,6 +21,7 @@ class Calculator:
         delimiter_part = self.numbers[2:delimiter_end_index]
 
         if delimiter_part.startswith("[") and delimiter_part.endswith("]"):
+            # Find all delimeters that would be inside []
             self.delimiters = re.findall(r'\[(.*?)\]', delimiter_part)
         else:
             self.delimiters = [delimiter_part]
@@ -28,9 +29,11 @@ class Calculator:
         self.numbers = self.numbers[delimiter_end_index + 1:]
 
         for delimiter in self.delimiters:
+            # Replace delimiter with a , 
             self.numbers = self.numbers.replace(delimiter, ",")
 
     def _get_numbers_array(self):
+        # Replace all occurances of \n with ,
         numbers_string = re.sub(r'[\r\n]+', ',', self.numbers)
         numbers_array = numbers_string.split(",")
                 
