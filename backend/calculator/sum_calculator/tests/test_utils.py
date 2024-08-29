@@ -41,3 +41,7 @@ class StringCalculatorTests(TestCase):
     def test_handle_long_delimiters(self):
         calculator = Calculator("//[***][%%%]\n1***2%%%3")
         self.assertEqual(calculator.add(), 6)
+        
+    def test_edge_case_with_only_delimiters(self):
+        calculator = Calculator("//;\n;;;")
+        self.assertEqual(calculator.add(), 0)
