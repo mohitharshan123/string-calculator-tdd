@@ -19,17 +19,16 @@ class Calculator:
     
     def _check_occurances(self, numbers_array):
         count_of_numbers = {}
+        modified_array = [num for num in numbers_array]
         for num in numbers_array:
             if num not in count_of_numbers:
                 count_of_numbers[num] = 1
             else:
                 count_of_numbers[num] += 1
-        
-        for key in count_of_numbers:
-            if count_of_numbers[key] >= 3:
-                numbers_array = [num for num in numbers_array if num != key]
-                numbers_array.append(key * key * key)
-        return numbers_array
+            if count_of_numbers[num] >= 3:
+                modified_array = [n for n in modified_array if num != n ]
+                modified_array.append(num * num * num)
+        return modified_array
             
         
     def _parse_custom_delimiters(self):
