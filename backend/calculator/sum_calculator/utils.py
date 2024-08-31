@@ -12,10 +12,26 @@ class Calculator:
             self._parse_custom_delimiters()
                             
         numbers_array = self._get_numbers_array()
+        numbers_array = self._check_occurances(numbers_array)
         self._validate_numbers(numbers_array)
         
         return sum(n for n in numbers_array if n <= 1000)
     
+    def _check_occurances(self, numbers_array):
+        count_of_numbers = {}
+        for num in numbers_array:
+            if num not in count_of_numbers:
+                count_of_numbers[num] = 1
+            else:
+                count_of_numbers[num] += 1
+        
+        for key in count_of_numbers:
+            if count_of_numbers[key] >= 3:
+                numbers_array = [num for num in numbers_array if num != key]
+                numbers_array.append(key * key * key)
+        return numbers_array
+            
+        
     def _parse_custom_delimiters(self):
         delimiter_end_index = self.numbers.index("\n")
         delimiter_part = self.numbers[2:delimiter_end_index]
