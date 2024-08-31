@@ -50,3 +50,8 @@ class StringCalculatorTests(TestCase):
         calculator = Calculator("1, 2, 3, 3, 3")
 
         self.assertEqual(calculator.calculate(), 30)
+    
+    def test_cube_numbers_for_more_than_one_number(self):
+        calculator = Calculator("1, 2, 3, 3, 3, 2, 2")
+
+        self.assertEqual(calculator.calculate(), 36)
