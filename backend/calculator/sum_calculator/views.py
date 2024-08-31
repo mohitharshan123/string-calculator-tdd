@@ -14,7 +14,7 @@ def calculate(request):
         numbers = serializer.validated_data['numbers']
         calculator = Calculator(numbers)
         try:
-            result = calculator.add()
+            result = calculator.calculate()
             return Response({'result': result})
         except NegativeNumberException as e:
             return Response({'numbers': str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -6,7 +6,7 @@ class Calculator:
         self.numbers = numbers
         self.delimiters = [',', '\n']
 
-    def add(self):
+    def calculate(self):
         # Handle custom delimiter if string starts with //
         if self.numbers.startswith("//"):
             self._parse_custom_delimiters()
