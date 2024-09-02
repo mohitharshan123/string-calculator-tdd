@@ -13,7 +13,6 @@ class Calculator:
             self._parse_custom_delimiters()
 
         numbers_array = self._get_numbers_array()
-        numbers_array = self._check_occurances(numbers_array)
         self._validate_numbers(numbers_array)
 
         return sum(n for n in numbers_array if n <= 1000)
